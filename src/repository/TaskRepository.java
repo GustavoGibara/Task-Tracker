@@ -1,35 +1,32 @@
 package repository;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import entities.Task;
-import enums.Status;
 
 public class TaskRepository {
 
     private final Path path = Paths.get("tasks.json");
 
-    private List<Task> tasks = new ArrayList<>(List.of(
-        new Task(1L, "Correr", Status.DONE, null, null),
-        new Task(2L, "Estudar", Status.TODO, null, null)
-    ));
-
     public TaskRepository() {
         if (Files.notExists(path)) {
             createJson();
         }
-
-        saveTasks(tasks);
     }
-
-
+    
+    //public List<Task> findAllTasks() {}
 
     private void createJson() {
         try {
@@ -39,7 +36,8 @@ public class TaskRepository {
         }
     }
 
-    private String buildTask(Task task) { 
+    private String buildTaskToJson(Task task) { 
+
         String taskJson = "\t{\n" 
                             + "\t\t\"id\": " + task.getId() + ",\n"
                             + "\t\t\"description\": \"" + task.getDescription() + "\",\n"
@@ -51,12 +49,30 @@ public class TaskRepository {
         return taskJson;
     }
 
-    private void saveTasks(List<Task> tasks) {
+    public Task buildJsonToTask(String taskJson) {
+        
+        String[] lines = taskJson.split("\n");
+
+        Pattern pattern = Pattern.compile("(?<=\\:\\s)[\\s\\S]+(?=,|$)");
+        
+        for (String line : lines) {
+            Matcher matcher = pattern.matcher(line);
+            
+            while(matcher.find()) {
+                System.out.println(matcher.group());
+            }
+        }
+        
+        return null;
+    }
+
+    public void saveTasks(List<Task> tasks) {
 
         try(BufferedWriter bw = Files.newBufferedWriter(path)) {
             bw.write("[\n");
+            
             List<String> jsonTasks = tasks.stream()
-                .map(t -> buildTask(t))
+                .map(t -> buildTaskToJson(t))
                 .collect(Collectors.toList());
 
             for (int i = 0; i < jsonTasks.size(); i++) {
@@ -65,11 +81,32 @@ public class TaskRepository {
                     bw.write(",\n");
                 }
             }
+
             bw.write("\n]");
-
-
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public List<Task> readTasks() {
+        List<Task> tasks = new ArrayList<>();
+
+        String regex = "(?<=\\{)[\\s\\S]*?(?=\\})";
+        Pattern pattern = Pattern.compile(regex);
+
+        try(BufferedReader br = Files.newBufferedReader(path)) {
+            String line = br.readAllAsString();
+            Matcher matcher = pattern.matcher(line);
+            while(matcher.find()) {
+                String taskJson = matcher.group();
+                Task task = buildJsonToTask(taskJson.trim());
+                tasks.add(task);
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return tasks;
     }
 }
