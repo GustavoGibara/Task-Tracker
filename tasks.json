@@ -1,1 +1,16 @@
-[]
+[
+	{
+		"id": 1,
+		"description": "Correr",
+		"status": "DONE",
+		"createdAt": "null",
+		"updatedAt": "null"
+	},
+	{
+		"id": 2,
+		"description": "Estudar",
+		"status": "TODO",
+		"createdAt": "null",
+		"updatedAt": "null"
+	}
+]
