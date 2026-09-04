@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import entities.Task;
 import enums.Status;
 
-public class jsonInteraction {
+public class JsonInteraction {
     
     private static final Path path = Paths.get("tasks.json");
 

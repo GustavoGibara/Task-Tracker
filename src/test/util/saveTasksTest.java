@@ -1,10 +1,10 @@
-package test;
+package test.util;
 import java.util.ArrayList;
 import java.util.List;
 
 import entities.Task;
 import enums.Status;
-import util.jsonInteraction;
+import util.JsonInteraction;
 
 public class saveTasksTest {
     private static List<Task> tasks = new ArrayList<>(List.of(
@@ -13,7 +13,7 @@ public class saveTasksTest {
     ));
     public static void main(String[] args) {
         
-        jsonInteraction.saveTasks(tasks);
-        
+        JsonInteraction.saveTasks(tasks);
+
     }
 }

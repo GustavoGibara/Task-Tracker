@@ -1,30 +1,16 @@
 [
 	{
 		"id": 1,
-		"description": "Correr",
-		"status": "DONE",
-		"createdAt": "null",
-		"updatedAt": "null"
+		"description": "Olá",
+		"status": "IN_PROGRESS",
+		"createdAt": "2026-09-04T16:50:08.278563800",
+		"updatedAt": "2026-09-04T16:50:08.278563800"
 	},
 	{
 		"id": 2,
-		"description": "Estudar",
-		"status": "TODO",
-		"createdAt": "null",
-		"updatedAt": "null"
-	},
-	{
-		"id": 3,
-		"description": "Olá",
-		"status": "IN_PROGRESS",
-		"createdAt": "null",
-		"updatedAt": "null"
-	},
-	{
-		"id": 4,
 		"description": "Olá mundo",
 		"status": "IN_PROGRESS",
-		"createdAt": "null",
-		"updatedAt": "null"
+		"createdAt": "2026-09-04T16:50:08.290600400",
+		"updatedAt": "2026-09-04T16:50:08.290600400"
 	}
 ]
