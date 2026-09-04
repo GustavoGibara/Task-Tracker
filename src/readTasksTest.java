@@ -4,6 +4,6 @@ public class readTasksTest {
     public static void main(String[] args) {
         TaskRepository taskRepository = new TaskRepository();
 
-        taskRepository.readTasks();
+        taskRepository.readTasks().forEach(System.out::println);
     }
 }
