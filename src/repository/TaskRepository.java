@@ -2,6 +2,8 @@ package repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import entities.Task;
 import util.JsonInteraction;
@@ -15,6 +17,15 @@ public class TaskRepository {
         tasks = JsonInteraction.readTasks();
     }
     
+    public Task findTask(Long id) {
+        Task task = tasks.stream()
+            .filter(t -> t.getId().equals(id))
+            .findFirst()
+            .orElseThrow();
+
+        return task;
+    }
+
     public List<Task> findAllTasks() {
         return JsonInteraction.readTasks();
     }
@@ -29,7 +40,7 @@ public class TaskRepository {
         JsonInteraction.saveTasks(tasks);
     }
 
-    public void removeTask(Task task) {  
+    public void removeTask(Task tas) {  
         if (tasks.contains(task)) {
             tasks.remove(task);
         } else {
@@ -38,5 +49,9 @@ public class TaskRepository {
         JsonInteraction.saveTasks(tasks);
     }
 
-    
+    public void updateTask(Task task) {
+
+    }
+
+
 }
