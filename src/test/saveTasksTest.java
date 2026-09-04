@@ -1,9 +1,10 @@
+package test;
 import java.util.ArrayList;
 import java.util.List;
 
 import entities.Task;
 import enums.Status;
-import repository.TaskRepository;
+import util.jsonInteraction;
 
 public class saveTasksTest {
     private static List<Task> tasks = new ArrayList<>(List.of(
@@ -11,8 +12,8 @@ public class saveTasksTest {
         new Task(2L, "Estudar", Status.TODO, null, null)
     ));
     public static void main(String[] args) {
-        TaskRepository taskRepository = new TaskRepository();
-
-        taskRepository.saveTasks(tasks);
+        
+        jsonInteraction.saveTasks(tasks);
+        
     }
 }
