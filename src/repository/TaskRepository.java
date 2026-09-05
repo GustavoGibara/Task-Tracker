@@ -1,9 +1,9 @@
 package repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import entities.Task;
 import util.JsonInteraction;
@@ -40,18 +40,29 @@ public class TaskRepository {
         JsonInteraction.saveTasks(tasks);
     }
 
-    public void removeTask(Task tas) {  
-        if (tasks.contains(task)) {
-            tasks.remove(task);
-        } else {
-            throw new IllegalArgumentException("Tarefa não existe na lista.");
+    public void removeTask(Long id) {  
+        
+        Iterator<Task> tasksIterator = tasks.iterator();
+
+        while(tasksIterator.hasNext()) {
+            if (tasksIterator.next().getId() == id) {
+                tasksIterator.remove();
+            } 
         }
+
         JsonInteraction.saveTasks(tasks);
     }
 
-    public void updateTask(Task task) {
+    public void updateTask(Long id, String description) {
 
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.setDescription(description);
+                task.setUpdatedAt(LocalDateTime.now());
+            }
+        }
+
+        JsonInteraction.saveTasks(tasks);
     }
-
 
 }

@@ -2,10 +2,10 @@ package test.repository;
 
 import repository.TaskRepository;
 
-public class removeTaskTest {
+public class updateTaskTest {
     public static void main(String[] args) {
         TaskRepository taskRepository = new TaskRepository();
 
-        taskRepository.removeTask(1L);
+        taskRepository.updateTask(2L, "COCO");
     }
 }

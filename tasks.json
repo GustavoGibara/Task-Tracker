@@ -1,16 +1,9 @@
 [
 	{
-		"id": 1,
-		"description": "Olá",
-		"status": "IN_PROGRESS",
-		"createdAt": "2026-09-04T16:50:08.278563800",
-		"updatedAt": "2026-09-04T16:50:08.278563800"
-	},
-	{
 		"id": 2,
-		"description": "Olá mundo",
-		"status": "IN_PROGRESS",
+		"description": "COCO",
+		"status": "DONE",
 		"createdAt": "2026-09-04T16:50:08.290600400",
-		"updatedAt": "2026-09-04T16:50:08.290600400"
+		"updatedAt": "2026-09-04T22:11:51.511393057"
 	}
 ]
