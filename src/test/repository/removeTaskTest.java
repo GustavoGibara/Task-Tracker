@@ -1,11 +1,12 @@
 package test.repository;
 
 import repository.TaskRepository;
+import repository.TaskRepositoryJson;
 
 public class removeTaskTest {
     public static void main(String[] args) {
-        TaskRepository taskRepository = new TaskRepository();
+        TaskRepository taskRepository = new TaskRepositoryJson();
 
-        taskRepository.removeTask(1L);
+        taskRepository.remove(1L);
     }
 }

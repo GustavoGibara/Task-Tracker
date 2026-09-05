@@ -4,6 +4,11 @@ import repository.TaskRepository;
 
 public class TaskService {
 
-    TaskRepository taskRepository = new TaskRepository();
+    TaskRepository taskRepository;
+
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
+
     
 }

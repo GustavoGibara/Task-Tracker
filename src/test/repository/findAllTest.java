@@ -1,11 +1,12 @@
 package test.repository;
 
 import repository.TaskRepository;
+import repository.TaskRepositoryJson;
 
 public class findAllTest {
     public static void main(String[] args) {
-        TaskRepository taskRepository = new TaskRepository();
+        TaskRepository taskRepository = new TaskRepositoryJson();
 
-        taskRepository.findAllTasks().forEach(System.out::println);
+        taskRepository.findAll().forEach(System.out::println);
     }
 }
