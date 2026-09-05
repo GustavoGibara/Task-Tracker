@@ -4,8 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import entities.Task;
+import enums.Status;
 import util.JsonInteraction;
 
 public class TaskRepository {
@@ -27,7 +30,7 @@ public class TaskRepository {
     }
 
     public List<Task> findAllTasks() {
-        return JsonInteraction.readTasks();
+        return tasks;
     }
     
     public void addTask(Task task) {
@@ -42,12 +45,19 @@ public class TaskRepository {
 
     public void removeTask(Long id) {  
         
+        boolean found = false;
+
         Iterator<Task> tasksIterator = tasks.iterator();
 
         while(tasksIterator.hasNext()) {
             if (tasksIterator.next().getId() == id) {
                 tasksIterator.remove();
+                found = true;
             } 
+        }
+
+        if (!found) {
+            throw new NoSuchElementException("ID não encontrado.");
         }
 
         JsonInteraction.saveTasks(tasks);
@@ -55,14 +65,29 @@ public class TaskRepository {
 
     public void updateTask(Long id, String description) {
 
+        boolean found = false;
+
         for (Task task : tasks) {
             if (task.getId() == id) {
                 task.setDescription(description);
                 task.setUpdatedAt(LocalDateTime.now());
+                found = true;
             }
         }
 
+        if (!found) {
+            throw new NoSuchElementException("ID não encontrado.");
+        }
+
         JsonInteraction.saveTasks(tasks);
+    }
+
+    public List<Task> findByStatus(Status status) {
+        List<Task> tasksByStatus = tasks.stream()
+                                .filter(t -> t.getStatus().equals(status))
+                                .collect(Collectors.toList());
+
+        return tasksByStatus;
     }
 
 }

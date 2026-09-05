@@ -30,18 +30,6 @@ public class JsonInteraction {
         }
     }
 
-    private static String buildTaskToJson(Task task) { 
-        String taskJson = "\t{\n" 
-                            + "\t\t\"id\": " + task.getId() + ",\n"
-                            + "\t\t\"description\": \"" + task.getDescription() + "\",\n"
-                            + "\t\t\"status\": \"" + task.getStatus().name() + "\",\n"
-                            + "\t\t\"createdAt\": \"" + task.getCreatedAt() + "\",\n"
-                            + "\t\t\"updatedAt\": \"" + task.getUpdatedAt() + "\"\n"
-                            + "\t}";
-
-        return taskJson;
-    }
-
     private static Task buildJsonToTask(String taskJson) {
         Pattern pattern = Pattern.compile(":\\s*\"?([^\",\\n]+)\"?");
         Matcher matcher = pattern.matcher(taskJson);
@@ -87,7 +75,10 @@ public class JsonInteraction {
             bw.write("[\n");
             
             List<String> jsonTasks = tasks.stream()
-                .map(t -> buildTaskToJson(t))
+                .map(Task::toJson)
+                .map(s -> s.replaceAll("\t", "\t\t"))
+                .map(s -> s.replaceAll("\\{", "\t\\{"))
+                .map(s -> s.replaceAll("\\}", "\t\\}"))
                 .collect(Collectors.toList());
 
             for (int i = 0; i < jsonTasks.size(); i++) {

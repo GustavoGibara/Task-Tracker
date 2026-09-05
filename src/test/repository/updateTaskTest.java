@@ -6,6 +6,6 @@ public class updateTaskTest {
     public static void main(String[] args) {
         TaskRepository taskRepository = new TaskRepository();
 
-        taskRepository.updateTask(2L, "COCO");
+        taskRepository.updateTask(3L, "COCO");
     }
 }

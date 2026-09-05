@@ -1,10 +1,12 @@
 package test.repository;
 
+import enums.Status;
 import repository.TaskRepository;
 
-public class findTask {
+public class findByStatusTest {
     public static void main(String[] args) {
         TaskRepository taskRepository = new TaskRepository();
-        System.out.println(taskRepository.findTask(11L));
+
+        taskRepository.findByStatus(Status.TODO).forEach(System.out::println);
     }
 }

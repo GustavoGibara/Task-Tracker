@@ -65,6 +65,18 @@ public class Task {
                 + ", updatedAt=" + updatedAt + "]";
     }
 
+    public String toJson() {
+        String taskJson = "{\n" 
+                            + "\t\"id\": " + id + ",\n"
+                            + "\t\"description\": \"" + description + "\",\n"
+                            + "\t\"status\": \"" + status.name() + "\",\n"
+                            + "\t\"createdAt\": \"" + createdAt + "\",\n"
+                            + "\t\"updatedAt\": \"" + updatedAt + "\"\n"
+                            + "}";
+
+        return taskJson;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
