@@ -74,7 +74,6 @@ public class TaskRepositoryJson implements TaskRepository{
 
         for (Task t : tasks) {
             if (t.getId() == task.getId()) {
-                System.out.println("oi");
                 if (!(task.getDescription() == null)) {
                     if (task.getDescription().isEmpty() || task.getDescription().isBlank()) {
                         throw new IllegalArgumentException();

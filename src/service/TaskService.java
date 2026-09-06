@@ -1,14 +1,16 @@
 package service;
 
-import repository.TaskRepository;
+import java.util.List;
 
-public class TaskService {
+import entities.Task;
 
-    TaskRepository taskRepository;
+public interface TaskService {
 
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
-
+    List<Task> findAll();
+    List<Task> findByStatus(String status);
+    Task findById(Long id);
+    void add(String taskDescription);
+    void remove(Long id);
+    void update(Task task);
     
 }
