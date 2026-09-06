@@ -11,6 +11,11 @@ import service.TaskServiceJson;
 public class task_cli {
     public static void main(String[] args) {
         
+        if (args.length == 0) {
+            showHelp();
+            return;
+        }
+
         TaskService taskService = new TaskServiceJson(new TaskRepositoryJson());
 
         String comando = args[0].toLowerCase();
@@ -52,7 +57,7 @@ public class task_cli {
 
                 for (Task task : tasks) {
                     System.out.println(task);
-                    System.out.println("-".repeat(20));
+                    System.out.println("-".repeat(30));
                 }
 
                 break;
@@ -120,10 +125,28 @@ public class task_cli {
                 }
 
                 break;
-        
+
+            case "--help":
+            case "-h":
+                showHelp();
+                break;    
+
             default:
+                System.out.println("Comando desconhecido: " + comando);
+                showHelp();
                 break;
         }
 
+    }
+
+    private static void showHelp() {
+        System.out.println("Uso: java task_cli <comando> [opções]");
+        System.out.println("\nComandos disponíveis:");
+        System.out.println("    list [nome do status] Exibe uma lista das tarefas. Caso passe status a lista virá filtrada. Status: todo, in-progress, done.");
+        System.out.println("    add <tarefa>          Registra tarefa na lista.");
+        System.out.println("    remove <id>           Remove a tarefa da lista.");
+        System.out.println("    update <id> <tarefa>  Atualiza tarefa da lista.");
+        System.out.println("    mark-in-progress <id> Altera o status da tarefa para in-progress.");
+        System.out.println("    mark-done <id>        Altera o status da tarefa para done.");
     }
 }
