@@ -4,14 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import entities.Task;
 import enums.Status;
 import util.JsonInteraction;
 
-public class TaskRepositoryJson implements TaskRepository{
+public class TaskRepositoryJson implements TaskRepository {
 
     private List<Task> tasks = new ArrayList<>(); 
     
@@ -25,7 +24,7 @@ public class TaskRepositoryJson implements TaskRepository{
         Task task = tasks.stream()
             .filter(t -> t.getId().equals(id))
             .findFirst()
-            .orElseThrow();
+            .orElseThrow(() -> new IllegalArgumentException("Id não encontrado."));
 
         return task;
     }
@@ -61,7 +60,7 @@ public class TaskRepositoryJson implements TaskRepository{
         }
 
         if (!found) {
-            throw new NoSuchElementException("ID não encontrado.");
+            throw new IllegalArgumentException("Id não encontrado.");
         }
 
         JsonInteraction.saveTasks(tasks);
@@ -75,11 +74,7 @@ public class TaskRepositoryJson implements TaskRepository{
         for (Task t : tasks) {
             if (t.getId() == task.getId()) {
                 if (!(task.getDescription() == null)) {
-                    if (task.getDescription().isEmpty() || task.getDescription().isBlank()) {
-                        throw new IllegalArgumentException();
-                    } else {
-                        t.setDescription(task.getDescription());
-                    }
+                    t.setDescription(task.getDescription());
                 }
                 if (!(task.getStatus() == null)) {
                     t.setStatus(task.getStatus());
@@ -90,7 +85,7 @@ public class TaskRepositoryJson implements TaskRepository{
         }
 
         if (!found) {
-            throw new NoSuchElementException("ID não encontrado.");
+            throw new IllegalArgumentException("ID não encontrado.");
         }
 
         JsonInteraction.saveTasks(tasks);

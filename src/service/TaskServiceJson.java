@@ -1,7 +1,6 @@
 package service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import entities.Task;
@@ -31,7 +30,7 @@ public class TaskServiceJson implements TaskService{
         try {
             statusFound = Status.valueOf(status
                                             .toUpperCase()
-                                            .replace("_", "-"));
+                                            .replace("-", "_"));
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Status não é válido. Status válidos: todo, in-progress e done.");
         }
@@ -71,16 +70,42 @@ public class TaskServiceJson implements TaskService{
 
     @Override
     public void remove(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        if (id <= 0L) {
+            throw new IllegalArgumentException("Id não pode se menor que 0. Procurar por Ids acima de 0");
+        }
+
+        taskRepository.remove(id);
     }
 
     @Override
-    public void update(Task task) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void updateDescription(String description) {
+        if (description.equals(null)) {
+            throw new NullPointerException("A tarefa não pode ser de um valor nulo.");
+        }
+        if (description.isBlank() || description.isEmpty()) {
+            throw new IllegalArgumentException("O valor não pode ser vazio.");
+        }
+
+        Task task = new Task(null, description, null, null, null);
+
+        taskRepository.update(task);
     }
 
-    
+    @Override
+    public void updateStatus(String status) {
+        Status statusFound = null;
+
+        try {
+            statusFound = Status.valueOf(status
+                                            .toUpperCase()
+                                            .replace("-", "_"));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Status não é válido. Status válidos: todo, in-progress e done.");
+        }
+
+        Task task = new Task(null, null, statusFound, null, null);
+
+        taskRepository.update(task);
+    }    
     
 }

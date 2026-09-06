@@ -9,6 +9,11 @@ public class findByStatusTest {
     public static void main(String[] args) {
         TaskService taskservice = new TaskServiceJson(new TaskRepositoryJson());
 
-        taskservice.findByStatus("todo1").forEach(System.out::println);
+
+        try {
+            taskservice.findByStatus("in-progress").forEach(System.out::println);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
