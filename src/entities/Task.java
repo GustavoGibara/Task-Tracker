@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import enums.Status;
 
@@ -10,6 +11,8 @@ public class Task {
     private Status status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"); 
     
     public Task(Long id, String description, Status status, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
@@ -61,8 +64,11 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task [id=" + id + ", description=" + description + ", status=" + status + ", createdAt=" + createdAt
-                + ", updatedAt=" + updatedAt + "]";
+        return "ID - " + id  + "\n" 
+                + "Tarefa: " + description + "\n" 
+                + "Status : " + status + "\n" 
+                + "Criado em: " + createdAt.format(dtf) + "\n"
+                + "Atualizado em: " + updatedAt.format(dtf);
     }
 
     public String toJson() {

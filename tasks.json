@@ -1,19 +1,5 @@
 [
 	{
-		"id": 1,
-		"description": "Correr",
-		"status": "DONE",
-		"createdAt": "null",
-		"updatedAt": "null"
-	},
-	{
-		"id": 2,
-		"description": "Não sou perfeito.",
-		"status": "DONE",
-		"createdAt": "null",
-		"updatedAt": "2026-09-06T00:26:39.608128"
-	},
-	{
 		"id": 4,
 		"description": "teste",
 		"status": "DONE",
@@ -35,13 +21,6 @@
 		"updatedAt": "2026-09-05T01:06:31.280463764"
 	},
 	{
-		"id": 7,
-		"description": "Olá",
-		"status": "IN_PROGRESS",
-		"createdAt": "2026-09-05T01:06:33.047829145",
-		"updatedAt": "2026-09-05T01:06:33.047866558"
-	},
-	{
 		"id": 8,
 		"description": "Olá mundo",
 		"status": "DONE",
@@ -54,20 +33,6 @@
 		"status": "IN_PROGRESS",
 		"createdAt": "2026-09-05T01:06:34.161834895",
 		"updatedAt": "2026-09-05T01:06:34.161861026"
-	},
-	{
-		"id": 10,
-		"description": "Olá mundo",
-		"status": "IN_PROGRESS",
-		"createdAt": "2026-09-05T01:06:34.171692334",
-		"updatedAt": "2026-09-05T01:06:34.171718365"
-	},
-	{
-		"id": 11,
-		"description": "Olá",
-		"status": "IN_PROGRESS",
-		"createdAt": "2026-09-05T01:06:35.194367823",
-		"updatedAt": "2026-09-05T01:06:35.194381660"
 	},
 	{
 		"id": 12,
@@ -92,23 +57,37 @@
 	},
 	{
 		"id": 15,
-		"description": "Cuzinho de Macho",
+		"description": "Sou Lindo",
 		"status": "TODO",
 		"createdAt": "2026-09-05T23:32:28.145054763",
-		"updatedAt": "2026-09-05T23:32:28.145074460"
+		"updatedAt": "2026-09-06T01:59:05.727406299"
 	},
 	{
 		"id": 16,
 		"description": "Cuzinho de Macho",
-		"status": "TODO",
+		"status": "DONE",
 		"createdAt": "2026-09-05T23:33:16.469176856",
-		"updatedAt": "2026-09-05T23:33:16.469196854"
+		"updatedAt": "2026-09-06T02:06:57.593100142"
 	},
 	{
 		"id": 17,
 		"description": "Cuzinho de Macho",
-		"status": "TODO",
+		"status": "IN_PROGRESS",
 		"createdAt": "2026-09-05T23:33:48.463340519",
-		"updatedAt": "2026-09-05T23:33:48.463358643"
+		"updatedAt": "2026-09-06T02:07:20.077252117"
+	},
+	{
+		"id": 18,
+		"description": "oi",
+		"status": "TODO",
+		"createdAt": "2026-09-06T00:55:45.442769308",
+		"updatedAt": "2026-09-06T00:55:45.442785889"
+	},
+	{
+		"id": 19,
+		"description": "Gustavo",
+		"status": "TODO",
+		"createdAt": "2026-09-06T01:29:48.402634275",
+		"updatedAt": "2026-09-06T01:29:48.402648382"
 	}
 ]
