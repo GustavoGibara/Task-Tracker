@@ -4,14 +4,12 @@ import repository.TaskRepositoryJson;
 import service.TaskService;
 import service.TaskServiceJson;
 
-public class findByStatusTest {
-
+public class removeTest {
     public static void main(String[] args) {
         TaskService taskservice = new TaskServiceJson(new TaskRepositoryJson());
-
-
+        
         try {
-            taskservice.findByStatus("done").forEach(System.out::println);
+            taskservice.remove(0L);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }

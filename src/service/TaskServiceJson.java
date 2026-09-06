@@ -24,17 +24,8 @@ public class TaskServiceJson implements TaskService{
 
     @Override
     public List<Task> findByStatus(String status) {
-
-        Status statusFound = null;
-
-        try {
-            statusFound = Status.valueOf(status
-                                            .toUpperCase()
-                                            .replace("-", "_"));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Status não é válido. Status válidos: todo, in-progress e done.");
-        }
-        
+                
+        Status statusFound = validateStatus(status);
         
         List<Task> tasks = taskRepository.findByStatus(statusFound);
 
@@ -44,9 +35,7 @@ public class TaskServiceJson implements TaskService{
 
     @Override
     public Task findById(Long id) {
-        if (id <= 0L) {
-            throw new IllegalArgumentException("Id não pode se menor que 0. Procurar por Ids acima de 0");
-        }
+        validateId(id);
 
         Task task = taskRepository.findById(id);
 
@@ -55,13 +44,8 @@ public class TaskServiceJson implements TaskService{
 
     @Override
     public void add(String taskDescription) {
-        if (taskDescription.equals(null)) {
-            throw new NullPointerException("A tarefa não pode ser de um valor nulo.");
-        }
-
-        if (taskDescription.isBlank() || taskDescription.isEmpty()) {
-            throw new IllegalArgumentException("O valor não pode ser vazio.");
-        }
+        
+        validateDescription(taskDescription);
 
         Task task = new Task(null, taskDescription, Status.TODO, LocalDateTime.now(), LocalDateTime.now());
 
@@ -70,15 +54,37 @@ public class TaskServiceJson implements TaskService{
 
     @Override
     public void remove(Long id) {
-        if (id <= 0L) {
-            throw new IllegalArgumentException("Id não pode se menor que 0. Procurar por Ids acima de 0");
-        }
+        validateId(id);
 
         taskRepository.remove(id);
     }
 
     @Override
-    public void updateDescription(String description) {
+    public void updateDescription(Long id, String description) {
+        
+        validateId(id);
+        
+        validateDescription(description);
+
+        Task task = new Task(id, description, null, null, null);
+
+        taskRepository.update(task);
+    }
+
+    @Override
+    public void updateStatus(Long id, String status) {
+
+        validateId(id);
+
+        Status statusFound = validateStatus(status);
+
+        Task task = new Task(id, null, statusFound, null, null);
+
+        taskRepository.update(task);
+    }
+
+    private void validateDescription(String description) {
+        
         if (description.equals(null)) {
             throw new NullPointerException("A tarefa não pode ser de um valor nulo.");
         }
@@ -86,13 +92,10 @@ public class TaskServiceJson implements TaskService{
             throw new IllegalArgumentException("O valor não pode ser vazio.");
         }
 
-        Task task = new Task(null, description, null, null, null);
-
-        taskRepository.update(task);
     }
-
-    @Override
-    public void updateStatus(String status) {
+    
+    private Status validateStatus(String status) {
+        
         Status statusFound = null;
 
         try {
@@ -103,9 +106,12 @@ public class TaskServiceJson implements TaskService{
             throw new IllegalArgumentException("Status não é válido. Status válidos: todo, in-progress e done.");
         }
 
-        Task task = new Task(null, null, statusFound, null, null);
+        return statusFound;
+    }
 
-        taskRepository.update(task);
-    }    
-    
+    private void validateId(Long id) {
+        if (id <= 0L) {
+            throw new IllegalArgumentException("Id não pode se menor que 0. Procurar por Ids acima de 0");
+        }
+    }
 }

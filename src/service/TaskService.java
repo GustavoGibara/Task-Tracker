@@ -11,6 +11,6 @@ public interface TaskService {
     Task findById(Long id);
     void add(String taskDescription);
     void remove(Long id);
-    void updateDescription(String description);
-    void updateStatus(String status);
+    void updateDescription(Long id, String description);
+    void updateStatus(Long id, String status);
 }

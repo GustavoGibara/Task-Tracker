@@ -4,16 +4,15 @@ import repository.TaskRepositoryJson;
 import service.TaskService;
 import service.TaskServiceJson;
 
-public class findByStatusTest {
-
+public class updateDescription {
     public static void main(String[] args) {
         TaskService taskservice = new TaskServiceJson(new TaskRepositoryJson());
-
-
+        
         try {
-            taskservice.findByStatus("done").forEach(System.out::println);
+            taskservice.updateDescription(3L, "Não sou perfeito.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+
     }
 }
